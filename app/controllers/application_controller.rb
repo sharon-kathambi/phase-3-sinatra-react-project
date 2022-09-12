@@ -1,5 +1,6 @@
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
+
   
   # Add your routes here
   get "/restaurants" do
@@ -29,6 +30,13 @@ class ApplicationController < Sinatra::Base
     review.to_json
   end
 
+
+
+  get '/reviews/:restaurant_id' do
+    review = restaurant.reviews.find(params[:restaurant_id])
+    review.to_json
+  end
+
   delete '/reviews/:id' do
     review = Review.find(params[:id])
     review.destroy
@@ -53,6 +61,7 @@ class ApplicationController < Sinatra::Base
     )
     review.to_json
   end
+
 
 
 end
